@@ -18,8 +18,7 @@ public class Region {
 
     public Region() {}
 
-    public Region(Long id, String name) {
-        this.id = id;
+    public Region(String name) {
         this.name = name;
     }
 }

@@ -17,8 +17,7 @@ public class IncomeGroup {
     private String name;
 
     public IncomeGroup() {}
-    public IncomeGroup(Long id, String name) {
-        this.id = id;
+    public IncomeGroup(String name) {
         this.name = name;
     }
 }
