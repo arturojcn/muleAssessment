@@ -3,9 +3,12 @@ package com.challenge.mule.worldbank;
 import com.challenge.mule.config.WorldBankProperties;
 import com.challenge.mule.exception.RestTemplateException;
 import com.challenge.mule.exception.RestTemplateExceptionHandler;
+import com.challenge.mule.model.DataControl;
+import com.challenge.mule.repository.DataControlRepository;
 import com.challenge.mule.util.ZipHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
@@ -20,6 +23,9 @@ import java.util.Date;
 @Component
 public class WorldBankClient {
     private final static Logger logger = LoggerFactory.getLogger(WorldBankClient.class);
+
+    @Autowired
+    private DataControlRepository dataControlRepository;
 
     RestTemplate restTemplate;
     WorldBankProperties worldBankProperties;
@@ -72,7 +78,7 @@ public class WorldBankClient {
             logger.error("Error to unzip file from world bank", e);
             throw e;
         }
-
+        this.dataControlRepository.save(new DataControl(pathFolder));
     }
 
 }
