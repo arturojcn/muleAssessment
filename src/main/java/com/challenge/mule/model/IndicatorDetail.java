@@ -7,7 +7,9 @@ import java.math.BigDecimal;
 
 @Data
 @Entity
-@Table(name = "indicatorDetails")
+@Table(name = "indicator_details", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"year", "country_id", "indicator_id"})
+})
 public class IndicatorDetail {
 
     @Id

@@ -21,6 +21,9 @@ public class Indicator {
     private String sourceOrganization;
 
     public Indicator() {}
+    public Indicator(String code) {
+        this.id = code;
+    }
     private Indicator(String id, String name, String sourceNote, String sourceOrganization) {
         this.id = id;
         this.name = name;

@@ -15,4 +15,8 @@ public class WorldBankProperties {
     private String years;
     private String downloadFormat;
     private String sourceParam;
+    private String prefixIndicatorFile;
+    private String prefixMetaIndicatorFile;
+    private String prefixMetaCountryFile;
+    private String resourceWorldBankFolder;
 }

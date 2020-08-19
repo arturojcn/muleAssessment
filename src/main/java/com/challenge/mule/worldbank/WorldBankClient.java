@@ -13,13 +13,14 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
 
 @Component
 public class WorldBankClient {
     private final static Logger logger = LoggerFactory.getLogger(WorldBankClient.class);
+
+    //@Autowired
+    //private DataControlRepository dataControlRepository;
 
     RestTemplate restTemplate;
     WorldBankProperties worldBankProperties;
@@ -33,13 +34,13 @@ public class WorldBankClient {
 
     public void getWorldBankIndicatorsCSV() throws IOException {
         logger.info("getting data from world bank");
-        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-        String pathFolder = this.worldBankProperties.getPathSaveData() + new Date().getTime();
+        //DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+        String pathFolder = this.worldBankProperties.getPathSaveData();
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
 
-        //TODO asign indicators vaariables because i hope to make a change to read indicators from queryparams
+        //TODO assign indicators variables (probably with other params to)because i hope to make a change to read indicators from queryParams
         String indicators = this.worldBankProperties.getIndicators();
         UriComponentsBuilder builder = UriComponentsBuilder
                 .fromHttpUrl(this.worldBankProperties.getHost()+indicators)
@@ -72,7 +73,11 @@ public class WorldBankClient {
             logger.error("Error to unzip file from world bank", e);
             throw e;
         }
-
+        //TODO I'm going to check this because it probable I can change the folder without doing something special
+        //return this.dataControlRepository.save(new DataControl(pathFolder));
     }
+
+    //TODO other method to do single request to worldBank with custom parameters in a new or current endpoints
+
 
 }
