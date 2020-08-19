@@ -21,13 +21,13 @@ public class MetaCountryItemWriter implements ItemWriter<MetaCountry> {
     private final static Logger logger = LoggerFactory.getLogger(MetaCountryItemWriter.class);
 
     @Autowired
-    RegionRepository regionRepository;
+    private RegionRepository regionRepository;
 
     @Autowired
-    IncomeGroupRepository incomeGroupRepository;
+    private IncomeGroupRepository incomeGroupRepository;
 
     @Autowired
-    CountryRepository countryRepository;
+    private CountryRepository countryRepository;
 
     private Map<String, Region> regions = new HashMap<>();
     private Map<String, IncomeGroup> incomeGroups = new HashMap<>();
@@ -91,7 +91,7 @@ public class MetaCountryItemWriter implements ItemWriter<MetaCountry> {
 
                 countrySaved.get().setIncomeGroup(this.incomeGroups.get(meta.getIncomeGroup()));
                 countrySaved.get().setSpecialNote(meta.getSpecialNote());
-                this.countryRepository.save(countrySaved.get());
+                this.countryRepository.saveAndFlush(countrySaved.get());
             }
         } else {
             Country countryToSave = new Country.CountryBuilder()
@@ -102,7 +102,7 @@ public class MetaCountryItemWriter implements ItemWriter<MetaCountry> {
                     .setRegion(this.regions.get(meta.getRegion()))
                     .createCountry();
             try {
-                this.countryRepository.save(countryToSave);
+                this.countryRepository.saveAndFlush(countryToSave);
             } catch (Exception e) {
                 logger.error("Something was wrong with " + meta.getCountryCode(), e);
             }
