@@ -18,4 +18,5 @@ public class WorldBankProperties {
     private String prefixIndicatorFile;
     private String prefixMetaIndicatorFile;
     private String prefixMetaCountryFile;
+    private String resourceWorldBankFolder;
 }
