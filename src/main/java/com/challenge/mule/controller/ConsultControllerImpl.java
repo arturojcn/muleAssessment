@@ -4,8 +4,7 @@ import com.challenge.mule.model.dto.IndicatorDTO;
 import com.challenge.mule.model.dto.SearchIndicatorParams;
 import com.challenge.mule.model.dto.SearchParams;
 import com.challenge.mule.service.ConsultServiceInterface;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.challenge.mule.util.SearchParamsHelper;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -19,12 +18,13 @@ public class ConsultControllerImpl implements ConsultControllerInterface {
 
     @Override
     public IndicatorDTO getWorldPopulationGrowth(SearchParams params) {
-
+        SearchParamsHelper.validate(params);
         return this.consultService.getWorldPopulationGrowth(params);
     }
 
     @Override
     public IndicatorDTO getIndicatorGrowth(SearchIndicatorParams params) {
+        SearchParamsHelper.validate(params);
         return this.consultService.getIndicatorGrowth(params);
     }
 }
