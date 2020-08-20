@@ -34,6 +34,19 @@ public class IndicatorDetail {
         this.country = country;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (obj == null || obj.getClass() != this.getClass()) {
+            return false;
+        }
+        IndicatorDetail guest = (IndicatorDetail) obj;
+        return (country.getCode().equals(guest.getCountry().getCode())
+                && indicator.getId().equals(guest.getIndicator().getId()));
+    }
+
     public static class IndicatorDetailBuilder {
         private Integer year;
         private BigDecimal value;

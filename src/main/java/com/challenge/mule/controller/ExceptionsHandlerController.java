@@ -1,5 +1,6 @@
 package com.challenge.mule.controller;
 
+import com.challenge.mule.exception.BadRequestException;
 import com.challenge.mule.exception.RestTemplateException;
 import com.challenge.mule.model.dto.ExceptionResponseDTO;
 import org.slf4j.Logger;
@@ -28,6 +29,19 @@ public class ExceptionsHandlerController extends ResponseEntityExceptionHandler{
                     .setMessage(e.getMessage())
                     .setPath(request.getRequestURI())
                     .createErrorResponseDTO());
+    }
+
+    @ExceptionHandler(BadRequestException.class)
+    ResponseEntity<ExceptionResponseDTO> badRequestException(BadRequestException e, HttpServletRequest request) {
+        logger.error("Something was wrong " + e.getMessage(), e);
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(new ExceptionResponseDTO.ExceptionResponseDTOBuilder()
+                        .setError(e.getMessage())
+                        .setStatus(HttpStatus.BAD_REQUEST)
+                        .setMessage("Please check your params and try again")
+                        .setPath(request.getRequestURI())
+                        .createErrorResponseDTO());
     }
 
     @ExceptionHandler(Exception.class)
