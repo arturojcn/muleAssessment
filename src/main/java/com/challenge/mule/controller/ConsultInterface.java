@@ -1,5 +1,8 @@
 package com.challenge.mule.controller;
 
+import com.challenge.mule.model.dto.IndicatorDTO;
+import com.challenge.mule.model.dto.SearchIndicatorParams;
+import com.challenge.mule.model.dto.SearchParams;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -14,13 +17,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public interface ConsultInterface {
 
     @GetMapping("/worldPopulation")
-    @ApiOperation(value = "get world population", tags = {"Consult"})
+    @ApiOperation(value = "This endpoint get the top 20 countries by population growth from 2012 to 2019 Year-to-Year", tags = {"Consult"})
     @ApiResponses(value = @ApiResponse(code = 200, message = "Success", response = String.class))
-    String getWorldPopulation();
+    IndicatorDTO getWorldPopulationGrow(SearchParams params);
 
 
-    @GetMapping("/gdp_ppp")
-    @ApiOperation(value = "get Gross Domestic Product and Purchasing-Power-Parity", tags = {"Consult"})
+    @GetMapping("/indicators")
+    @ApiOperation(value = "This endpoint get by default the top 5 countries by GDP growth Indicator " +
+            "from the top 20 countries by population growth from 2012 to 2019 Year-to-Year", tags = {"Consult"})
     @ApiResponses(value = @ApiResponse(code = 200, message = "Success", response = String.class))
-    String getGdpPpp();
+    IndicatorDTO getIndicatorGrowth(SearchIndicatorParams params);
 }
