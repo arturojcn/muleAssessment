@@ -14,7 +14,8 @@ To run application
   - mvn clean install
   - java -Xmx64m -Xss1536m -jar target/mule-0.0.1-SNAPSHOT.jar
   
-**Technology implement**
+
+**Technologies implemented**
 ========================
   - Spring boot 2.3.3.RELEASE
   - Spring-batch
