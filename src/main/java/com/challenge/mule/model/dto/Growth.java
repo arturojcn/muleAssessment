@@ -12,4 +12,8 @@ public class Growth {
     // and we can have all formulas in DB and choice formula by queryParam
     private String growthFormulaCode="SUM_AVG_YEAR";
     private String growthFormulaName="SUM average per year";
+
+    public Growth(BigDecimal average) {
+        this.average = average;
+    }
 }
