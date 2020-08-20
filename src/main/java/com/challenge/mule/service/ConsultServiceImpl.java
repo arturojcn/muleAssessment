@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -29,22 +30,26 @@ public class ConsultServiceImpl implements ConsultServiceInterface {
     @Override
     public List<IndicatorDTO> getWorldPopulationGrowth(SearchParams params) {
         List<IndicatorDTO> response = new ArrayList<>();
-        this.processPopulationGrowth(null, null, 0, new BigDecimal(0), response, null);
+        //TODO order and get 20 countries default or numbersCountries response
+        this.processPopulationGrowth(null, null, 0, new BigDecimal(0), response, null, params);
         return response;
     }
 
     @Override
     public List<IndicatorDTO> getIndicatorGrowth(SearchIndicatorParams params) {
-        return new ArrayList<>();
+        List<IndicatorDTO> response = new ArrayList<>();
+        //TODO only to response somethings
+        this.processPopulationGrowth(null, null, 0, new BigDecimal(0), response, null, params);
+        return response;
     }
 
+    //TODO improve this with params got in the request and change hardcode by properties and handler possibles IndexOutOfBoundsException
     private void processPopulationGrowth(List<IndicatorDetail> detailList, IndicatorDetail singleDetail,
-                                                       int index, BigDecimal sum, List<IndicatorDTO> response, IndicatorDTO indicatorDTO) {
+                                                       int index, BigDecimal sum, List<IndicatorDTO> response,
+                                                        IndicatorDTO indicatorDTO, SearchParams params) {
         if (singleDetail==null) {
-            Indicator indicator = new Indicator.IndicatorBuilder().setId("SP.POP.TOTL").createIndicator();
-            IndicatorDetail indicatorDetail = new IndicatorDetail.IndicatorDetailBuilder().setIndicator(indicator).createIndicatorDetail();
 
-            detailList = this.indicatorDetailRepository.findAll(Example.of(indicatorDetail));
+            detailList = this.indicatorDetailRepository.findAllByRangeDateAndIndicators(params.getIndicatorsCode(), 2012, 2019);
 
             singleDetail = detailList.get(index);
             indicatorDTO = IndicatorDTO.builder()
@@ -82,6 +87,6 @@ public class ConsultServiceImpl implements ConsultServiceInterface {
             sum = new BigDecimal(0);
         }
         if(++index >= detailList.size() ) return;
-        processPopulationGrowth( detailList, detailList.get(index), index, sum, response, indicatorDTO);
+        processPopulationGrowth( detailList, detailList.get(index), index, sum, response, indicatorDTO, null);
     }
 }

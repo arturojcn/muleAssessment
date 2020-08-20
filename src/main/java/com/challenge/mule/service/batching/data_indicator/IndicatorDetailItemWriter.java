@@ -107,6 +107,7 @@ public class IndicatorDetailItemWriter implements ItemWriter<IndicatorDetailData
         });
     }
 
+    //TODO change this ternary operator by a Predicate implementation
     private int getEndYear(IndicatorDetailData indicator) {
         int endYear = Integer.parseInt(indicator.getYear0().replace(YEAR_REPLACE, ""));
         endYear = indicator.getYear1() != null ? Integer.parseInt(indicator.getYear1().replace(YEAR_REPLACE, "")) : endYear;
