@@ -3,11 +3,11 @@ package com.challenge.mule;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
 class MuleApplicationTests {
 
-	@Test
+	//mvn @Test
 	void contextLoads() {
+
 	}
 
 }
