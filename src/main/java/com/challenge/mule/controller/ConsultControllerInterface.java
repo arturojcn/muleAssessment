@@ -1,9 +1,6 @@
 package com.challenge.mule.controller;
 
-import com.challenge.mule.model.dto.ExceptionResponseDTO;
-import com.challenge.mule.model.dto.IndicatorDTO;
-import com.challenge.mule.model.dto.SearchIndicatorParams;
-import com.challenge.mule.model.dto.SearchParams;
+import com.challenge.mule.model.dto.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -28,7 +25,7 @@ public interface ConsultControllerInterface {
             @ApiResponse(code = 500, message = "Internal Server Error", response = ExceptionResponseDTO.class),
             @ApiResponse(code = 503, message = "Time out", response = ExceptionResponseDTO.class)
     })
-    List<IndicatorDTO> getWorldPopulationGrowth(SearchParams params);
+    List<IndicatorDTO> getWorldPopulationGrowth(SearchGrowthParams params);
 
 
     @GetMapping("/indicators")
