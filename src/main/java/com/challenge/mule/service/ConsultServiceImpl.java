@@ -1,20 +1,20 @@
 package com.challenge.mule.service;
 
-import com.challenge.mule.model.Indicator;
 import com.challenge.mule.model.IndicatorDetail;
 import com.challenge.mule.model.dto.*;
 import com.challenge.mule.repository.IndicatorDetailRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+//TODO figure out the possibility to implement a functionality to save by determinate time responses by determinate request
+// some with this feature we can to save the processing data that it's required
 
 @Service
 public class ConsultServiceImpl implements ConsultServiceInterface {
@@ -25,7 +25,6 @@ public class ConsultServiceImpl implements ConsultServiceInterface {
     public ConsultServiceImpl(IndicatorDetailRepository indicatorDetailRepository) {
         this.indicatorDetailRepository = indicatorDetailRepository;
     }
-
 
     @Override
     public List<IndicatorDTO> getWorldPopulationGrowth(SearchParams params) {
