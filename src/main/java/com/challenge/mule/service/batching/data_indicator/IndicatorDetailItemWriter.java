@@ -82,19 +82,17 @@ public class IndicatorDetailItemWriter implements ItemWriter<IndicatorDetailData
                         newIndicatorDetails.forEach(newIterable -> {
                             boolean found = false;
                             for (IndicatorDetail savedIterable: indicatorDetailsSaved) {
-                                if (savedIterable.getYear() == newIterable.getYear()) {
-                                    if (savedIterable.getValue() != newIterable.getValue()) {
-                                        savedIterable.setValue(newIterable.getValue());
+                                if (savedIterable.getYear().equals(newIterable.getYear())) {
+                                    if (savedIterable.getValue().intValue() != newIterable.getValue().intValue()) {
+                                        this.indicatorDetailRepository.updateValueById(newIterable.getValue(), savedIterable.getId());
                                     }
-                                    indicatorsToSave.add(savedIterable);
                                     indicatorDetailsSaved.remove(savedIterable);
                                     found=true;
                                     break;
                                 }
                             }
-                            if (!found) { indicatorsToSave.add(newIterable); }
+                            if (!found) { this.indicatorDetailRepository.save(newIterable); }
                         });
-                        this.indicatorDetailRepository.saveAll(indicatorsToSave);
                     }
                 } catch (DataIntegrityViolationException e) {
                     logger.error("indicator already exist", e);
@@ -109,6 +107,7 @@ public class IndicatorDetailItemWriter implements ItemWriter<IndicatorDetailData
         });
     }
 
+    //TODO change this ternary operator by a Predicate implementation
     private int getEndYear(IndicatorDetailData indicator) {
         int endYear = Integer.parseInt(indicator.getYear0().replace(YEAR_REPLACE, ""));
         endYear = indicator.getYear1() != null ? Integer.parseInt(indicator.getYear1().replace(YEAR_REPLACE, "")) : endYear;
@@ -120,7 +119,7 @@ public class IndicatorDetailItemWriter implements ItemWriter<IndicatorDetailData
         endYear = indicator.getYear7() != null ? Integer.parseInt(indicator.getYear7().replace(YEAR_REPLACE, "")) : endYear;
         endYear = indicator.getYear8() != null ? Integer.parseInt(indicator.getYear8().replace(YEAR_REPLACE, "")) : endYear;
 
-        return indicator.getYear9() != null ? Integer.parseInt(indicator.getYear9()) : endYear;
+        return indicator.getYear9() != null ? Integer.parseInt(indicator.getYear9().replace(YEAR_REPLACE, "")) : endYear;
 
     }
 

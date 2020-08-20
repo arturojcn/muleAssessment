@@ -1,6 +1,7 @@
 package com.challenge.mule.controller;
 
 import com.challenge.mule.model.dto.IndicatorDTO;
+import com.challenge.mule.model.dto.SearchGrowthParams;
 import com.challenge.mule.model.dto.SearchIndicatorParams;
 import com.challenge.mule.model.dto.SearchParams;
 import com.challenge.mule.service.ConsultServiceInterface;
@@ -19,7 +20,7 @@ public class ConsultControllerImpl implements ConsultControllerInterface {
     }
 
     @Override
-    public List<IndicatorDTO> getWorldPopulationGrowth(SearchParams params) {
+    public List<IndicatorDTO> getWorldPopulationGrowth(SearchGrowthParams params) {
         SearchParamsHelper.validate(params);
         return this.consultService.getWorldPopulationGrowth(params);
     }
