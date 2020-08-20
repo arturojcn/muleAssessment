@@ -7,6 +7,8 @@ import com.challenge.mule.service.ConsultServiceInterface;
 import com.challenge.mule.util.SearchParamsHelper;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 
 @RestController
 public class ConsultControllerImpl implements ConsultControllerInterface {
@@ -17,13 +19,13 @@ public class ConsultControllerImpl implements ConsultControllerInterface {
     }
 
     @Override
-    public IndicatorDTO getWorldPopulationGrowth(SearchParams params) {
+    public List<IndicatorDTO> getWorldPopulationGrowth(SearchParams params) {
         SearchParamsHelper.validate(params);
         return this.consultService.getWorldPopulationGrowth(params);
     }
 
     @Override
-    public IndicatorDTO getIndicatorGrowth(SearchIndicatorParams params) {
+    public List<IndicatorDTO> getIndicatorGrowth(SearchIndicatorParams params) {
         SearchParamsHelper.validate(params);
         return this.consultService.getIndicatorGrowth(params);
     }

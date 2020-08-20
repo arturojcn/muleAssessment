@@ -12,6 +12,8 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @RequestMapping(value = "/api/v1", consumes = { MediaType.APPLICATION_JSON_VALUE },
         produces = { MediaType.APPLICATION_JSON_VALUE })
 @Api(value = "ConsultData", tags = { "Consult" })
@@ -26,7 +28,7 @@ public interface ConsultControllerInterface {
             @ApiResponse(code = 500, message = "Internal Server Error", response = ExceptionResponseDTO.class),
             @ApiResponse(code = 503, message = "Time out", response = ExceptionResponseDTO.class)
     })
-    IndicatorDTO getWorldPopulationGrowth(SearchParams params);
+    List<IndicatorDTO> getWorldPopulationGrowth(SearchParams params);
 
 
     @GetMapping("/indicators")
@@ -39,5 +41,5 @@ public interface ConsultControllerInterface {
             @ApiResponse(code = 500, message = "Internal Server Error", response = ExceptionResponseDTO.class),
             @ApiResponse(code = 503, message = "Time out", response = ExceptionResponseDTO.class)
     })
-    IndicatorDTO getIndicatorGrowth(SearchIndicatorParams params);
+    List<IndicatorDTO> getIndicatorGrowth(SearchIndicatorParams params);
 }
