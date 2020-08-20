@@ -4,8 +4,10 @@ import com.challenge.mule.model.dto.IndicatorDTO;
 import com.challenge.mule.model.dto.SearchIndicatorParams;
 import com.challenge.mule.model.dto.SearchParams;
 
+import java.util.List;
+
 public interface ConsultServiceInterface {
 
-    IndicatorDTO getWorldPopulationGrowth(SearchParams params);
-    IndicatorDTO getIndicatorGrowth(SearchIndicatorParams params);
+    List<IndicatorDTO> getWorldPopulationGrowth(SearchParams params);
+    List<IndicatorDTO> getIndicatorGrowth(SearchIndicatorParams params);
 }
